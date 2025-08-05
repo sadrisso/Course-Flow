@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+
 const HeroSection: React.FC = () => {
   return (
     <section className="container mx-auto px-4 py-16 flex flex-col-reverse md:flex-row items-center gap-10">
