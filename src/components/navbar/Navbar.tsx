@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import LoginButton from "../loginButton/LoginButton";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ const Navbar: React.FC = () => {
               Blogs
             </Link>
           </li>
+          <LoginButton />
         </ul>
 
         {/* CTA Button */}
@@ -63,6 +65,7 @@ const Navbar: React.FC = () => {
           <Link href="#contact" className="block hover:text-blue-600">
             Blogs
           </Link>
+          <LoginButton />
           <Link
             href="#start"
             className="inline-block w-full text-center mt-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
