@@ -1,3 +1,4 @@
+import FeaturesSection from "@/components/features-section/FeaturesSection";
 import HeroSection from "@/components/heroSection/HeroSection";
 
 export default function Home() {
@@ -5,6 +6,10 @@ export default function Home() {
     <div>
       <div>
         <HeroSection />
+      </div>
+
+      <div>
+        <FeaturesSection />
       </div>
     </div>
   );
