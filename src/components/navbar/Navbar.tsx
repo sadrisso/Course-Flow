@@ -16,13 +16,19 @@ const Navbar: React.FC = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 font-medium text-gray-700">
           <li>
-            <a href="#features" className="hover:text-blue-600">Features</a>
+            <Link href="/" className="hover:text-blue-600">
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:text-blue-600">About</Link>
+            <Link href="/about" className="hover:text-blue-600">
+              About
+            </Link>
           </li>
           <li>
-            <a href="#contact" className="hover:text-blue-600">Blogs</a>
+            <Link href="/blogs" className="hover:text-blue-600">
+              Blogs
+            </Link>
           </li>
         </ul>
 
@@ -48,9 +54,15 @@ const Navbar: React.FC = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white px-4 pb-4 space-y-3 text-gray-700">
-          <a href="#features" className="block hover:text-blue-600">Features</a>
-          <Link href="/about" className="block hover:text-blue-600">About</Link>
-          <a href="#contact" className="block hover:text-blue-600">Contact</a>
+          <Link href="/" className="hover:text-blue-600">
+            Home
+          </Link>
+          <Link href="/about" className="block hover:text-blue-600">
+            About
+          </Link>
+          <Link href="#contact" className="block hover:text-blue-600">
+            Blogs
+          </Link>
           <Link
             href="#start"
             className="inline-block w-full text-center mt-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
