@@ -23,19 +23,11 @@ export const authOptions = {
         // You can also use the `req` object to obtain additional parameters
         console.log("User auth credentials --> ", credentials);
         const user = { id: '1', name: "Jsmith", email: "da@gmail.com" };
-        // (i.e., the request IP address)
-        // const res = await fetch("/your/endpoint", {
-        //   method: "POST",
-        //   body: JSON.stringify(credentials),
-        //   headers: { "Content-Type": "application/json" },
-        // });
-        // const user = await res.json();
 
         // If no error and we have user data, return it
         if (user) {
           return user;
         }
-        // Return null if user data could not be retrieved
         return null;
       },
     }),
