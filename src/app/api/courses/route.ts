@@ -1,9 +1,11 @@
-import { dbConnect } from '@/lib/dbConnect';
-import { NextResponse } from 'next/server';
+import { dbConnect } from "@/lib/dbConnect";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const courses = await dbConnect("courses").then(col => col.find().toArray());
+    const courses = await dbConnect("courses").then((col) =>
+      col.find().toArray()
+    );
 
     return NextResponse.json(courses);
   } catch (error) {
@@ -15,10 +17,30 @@ export async function GET() {
   }
 }
 
-
 export async function POST(req: Request) {
-  const postedData = await req.json();
+  try {
+    const postedData = await req.json();
 
-  return NextResponse.json({ postedData });
+    if (!postedData || typeof postedData !== "object") {
+      return NextResponse.json(
+        { success: false, message: "Invalid data submitted." },
+        { status: 400 }
+      );
+    }
+
+    const result = await dbConnect("courses").then((col) =>
+      col.insertOne(postedData)
+    );
+
+    return NextResponse.json(
+      { success: true, message: "Course inserted successfully.", data: result },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("POST /courses error:", error);
+    return NextResponse.json(
+      { success: false, message: "Something went wrong." },
+      { status: 500 }
+    );
+  }
 }
-
