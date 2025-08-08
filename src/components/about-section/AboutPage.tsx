@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Navbar from "../navbar/Navbar";
+
 
 const teamMembers = [
   {
@@ -24,12 +24,12 @@ const teamMembers = [
 const AboutPage: React.FC = () => {
   return (
     <div className="bg-white text-gray-800">
-      <Navbar />
+
       {/* Header Section */}
       <section className="bg-gray-100 py-20 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl font-bold mb-4">About EduTrack</h1>
+        <h1 className="text-4xl font-bold mb-4">About CourseFlow</h1>
         <p className="max-w-2xl mx-auto text-gray-600 text-lg">
-          EduTrack is your smart companion for managing online education. Built
+          CourseFlow is your smart companion for managing online education. Built
           for instructors, students, and administrators who want a seamless
           learning experience.
         </p>
@@ -78,10 +78,10 @@ const AboutPage: React.FC = () => {
       {/* Call To Action */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-blue-600 text-white text-center">
         <h2 className="text-3xl font-bold mb-4">
-          Ready to Experience EduTrack?
+          Ready to Experience CourseFlow?
         </h2>
         <p className="max-w-xl mx-auto mb-6">
-          Start managing your courses smarter — try EduTrack now and transform
+          Start managing your courses smarter — try CourseFlow now and transform
           your online education.
         </p>
         <Link

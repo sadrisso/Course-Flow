@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row text-gray-800">
       {/* Mobile Navbar */}
       <div className="md:hidden bg-white shadow-md flex justify-between items-center p-4">
-        <h1 className="text-xl font-bold">EduTrack</h1>
+        <h1 className="text-xl font-bold">CourseFlow</h1>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="focus:outline-none"
@@ -65,11 +65,11 @@ const Dashboard: React.FC = () => {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <h2 className="text-2xl font-bold mb-8 hidden md:block"><Link href="/">EduTrack</Link></h2>
         <nav className="flex flex-col gap-4">
           <a href="#" className="text-blue-600 font-semibold">
             Dashboard
           </a>
+          <Link href="/">Home</Link>
           <a href="#">Courses</a>
           <a href="#">Students</a>
           <a href="#">Instructors</a>

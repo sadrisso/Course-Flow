@@ -8,19 +8,19 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What is EduTrack?",
+    question: "What is CourseFlow?",
     answer:
-      "EduTrack is a course management platform that helps you manage courses, students, and instructors in one place.",
+      "CourseFlow is a course management platform that helps you manage courses, students, and instructors in one place.",
   },
   {
-    question: "Is EduTrack free to use?",
+    question: "Is CourseFlow free to use?",
     answer:
-      "Yes, EduTrack offers a free version with core features. You can upgrade anytime for advanced tools.",
+      "Yes, CourseFlow offers a free version with core features. You can upgrade anytime for advanced tools.",
   },
   {
     question: "Can I manage multiple instructors?",
     answer:
-      "Absolutely! EduTrack lets you assign and manage multiple instructors for different courses.",
+      "Absolutely! CourseFlow lets you assign and manage multiple instructors for different courses.",
   },
   {
     question: "Is my data secure?",

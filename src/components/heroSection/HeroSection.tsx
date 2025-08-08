@@ -6,13 +6,13 @@ import Image from "next/image";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="container mx-auto px-4 py-16 flex flex-col-reverse md:flex-row items-center gap-10">
+    <section className="container bg-white mx-auto px-4 py-16 flex flex-col-reverse md:flex-row items-center gap-10">
       {/* Left content */}
       <div className="text-center md:text-left max-w-xl md:pl-8">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
           Manage Courses Effortlessly with{" "}
           <Link href="/" className="text-blue-600">
-            EduTrack
+            CourseFlow
           </Link>
         </h1>
         <p className="mt-4 text-gray-600 text-lg">

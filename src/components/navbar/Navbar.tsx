@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold text-blue-600">
-          EduTrack
+          CourseFlow
         </Link>
 
         {/* Desktop Menu */}
@@ -29,6 +29,11 @@ const Navbar: React.FC = () => {
           <li>
             <Link href="/blogs" className="hover:text-blue-600">
               Blogs
+            </Link>
+          </li>
+          <li>
+            <Link href="/courses" className="hover:text-blue-600">
+              Courses
             </Link>
           </li>
           <LoginButton />
@@ -65,6 +70,11 @@ const Navbar: React.FC = () => {
           <Link href="#contact" className="block hover:text-blue-600">
             Blogs
           </Link>
+          <li>
+            <Link href="/courses" className="hover:text-blue-600">
+              Courses
+            </Link>
+          </li>
           <LoginButton />
           <Link
             href="#start"

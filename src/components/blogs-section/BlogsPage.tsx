@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "../navbar/Navbar";
 
 interface Blog {
   id: number;
@@ -49,7 +48,6 @@ const blogs: Blog[] = [
 const BlogsPage: React.FC = () => {
   return (
     <>
-      <Navbar />
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto text-center mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
