@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, context: { params: { id: string } }) {
-  const { id } = context.params;
+  const { id } = await context.params;
 
   try {
     if (!ObjectId.isValid(id)) {

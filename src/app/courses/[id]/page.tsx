@@ -21,7 +21,7 @@ const getSingleCourseData = async (id: string): Promise<ApiResponse> => {
 };
 
 const CoursesDetails = async ({ params }: { params: { id: string } }) => {
-  const id = params?.id;
+  const { id } = await params;
 
   const response = await getSingleCourseData(id);
   const singleCourseData = response.data;

@@ -41,12 +41,12 @@ const Navbar: React.FC = () => {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <a
-            href="#start"
+          <Link
+            href="/register"
             className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
           >
-            Get Started
-          </a>
+            Register
+          </Link>
         </div>
 
         {/* Mobile Menu Icon */}
