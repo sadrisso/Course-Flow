@@ -5,6 +5,7 @@ import React, { useState } from "react";
 interface RegisterFormData {
   name: string;
   email: string;
+  role: string;
   password: string;
   confirmPassword: string;
 }
@@ -13,6 +14,7 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
     name: "",
     email: "",
+    role: "",
     password: "",
     confirmPassword: "",
   });
@@ -20,7 +22,7 @@ const Register: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -50,6 +52,7 @@ const Register: React.FC = () => {
       setFormData({
         name: "",
         email: "",
+        role: "",
         password: "",
         confirmPassword: "",
       });
@@ -86,6 +89,17 @@ const Register: React.FC = () => {
             required
             className="w-full border p-2 rounded"
           />
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            required
+            className="w-full border p-2 rounded"
+          >
+            <option value="">Select Role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
           <input
             type="password"
             name="password"
