@@ -4,9 +4,10 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import LoginButton from "../loginButton/LoginButton";
 
+
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
