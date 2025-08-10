@@ -49,7 +49,7 @@ export default function AllCourses() {
     });
   };
 
-  if (coursesIsLoading) return <p className="text-black">Loading...</p>;
+  if (coursesIsLoading) return <p className="text-black bg-white min-h-screen">Loading...</p>;
 
   if (coursesError) return <p className="text-black">There is an error</p>;
 

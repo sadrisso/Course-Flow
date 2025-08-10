@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import {
   LineChart,
@@ -11,9 +11,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Link from "next/link";
-import { useGetCoursesQuery } from "@/redux/services/coursesApi";
+import {
+  useGetCourseQuery,
+  useGetCoursesQuery,
+} from "@/redux/services/coursesApi";
 import { useSession } from "next-auth/react";
 import { useGetUsersQuery } from "@/redux/services/usersApi";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 const data = [
   { name: "Jan", users: 300 },
@@ -26,8 +30,18 @@ const data = [
 const Dashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { data: session } = useSession();
-  const { data: users } = useGetUsersQuery();
-  const { data: courses } = useGetCoursesQuery();
+  const email = session?.user?.email;
+  const { data: users, refetch: refetchUsers } = useGetUsersQuery();
+  const { data: courses, refetch: refetchCourses } = useGetCoursesQuery();
+  const { data: course, refetch: refetchCourse } = useGetCourseQuery(
+    email ?? skipToken
+  );
+
+  useEffect(() => {
+    refetchCourse();
+    refetchCourses();
+    refetchUsers();
+  }, [refetchCourse, refetchCourses, refetchUsers]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row text-gray-800">
@@ -54,8 +68,8 @@ const Dashboard: React.FC = () => {
           </Link>
           <Link href="/">Home</Link>
           <Link href="/courses">Courses</Link>
-          <Link href="#">Users</Link>
-          <a href="#">Instructors</a>
+          <Link href="/users">Users</Link>
+          <Link href="/my-courses">My Courses</Link>
           <a href="#">Settings</a>
         </nav>
       </aside>
@@ -108,6 +122,15 @@ const Dashboard: React.FC = () => {
               <div>
                 <p className="text-sm text-gray-500">Total Courses</p>
                 <p className="text-xl font-bold">{courses?.length}</p>
+              </div>
+            </div>
+          </Link>
+          <Link href="/my-courses">
+            <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+              <div className="bg-gray-100 p-3 rounded-full"></div>
+              <div>
+                <p className="text-sm text-gray-500">My Courses</p>
+                <p className="text-xl font-bold">{course?.length}</p>
               </div>
             </div>
           </Link>

@@ -6,7 +6,7 @@ function UserPage() {
   const { data: users, error, isLoading } = useGetUsersQuery();
 
   if (isLoading) {
-    return <p className="text-center text-gray-500">Loading users...</p>;
+    return <p className="text-center text-black bg-white min-h-screen">Loading users...</p>;
   }
 
   if (error) {

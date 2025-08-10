@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 
@@ -11,6 +11,31 @@ interface BookCourseButtonProps {
 const BookCourseButton: React.FC<BookCourseButtonProps> = ({ courseId }) => {
   const { data: session } = useSession();
   const [isBooked, setIsBooked] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!session?.user?.email) {
+      setLoading(false);
+      return;
+    }
+
+    // Check if already booked
+    fetch(
+      `/api/booked-courses?courseId=${courseId}&email=${session.user.email}`
+    )
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        throw new Error("Failed to fetch booking status");
+      })
+      .then((data) => {
+        if (data.isBooked) {
+          setIsBooked(true);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, [session, courseId]);
+
 
   const handleBookCourse = async () => {
     if (!session?.user?.email) {
@@ -33,7 +58,7 @@ const BookCourseButton: React.FC<BookCourseButtonProps> = ({ courseId }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setIsBooked(true)
+        setIsBooked(true);
       } else {
         Swal.fire({
           icon: "error",
@@ -52,6 +77,8 @@ const BookCourseButton: React.FC<BookCourseButtonProps> = ({ courseId }) => {
       });
     }
   };
+
+  if (loading) return <button disabled className="opacity-50 cursor-not-allowed px-8 py-3 rounded-lg">Loading...</button>;
 
   return (
     <button

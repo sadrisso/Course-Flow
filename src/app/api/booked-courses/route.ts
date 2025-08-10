@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { dbConnect } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const email = url.searchParams.get("email");
+
+    // Build filter object based on query params
+    const filter: Record<string, any> = {};
+    if (email) filter.email = email;
+
     const bookedCourses = await dbConnect("booked-courses").then((col) =>
-      col.find().toArray()
+      col.find(filter).toArray()
     );
 
     return NextResponse.json(bookedCourses);
@@ -16,6 +25,7 @@ export async function GET() {
     );
   }
 }
+
 
 export async function POST(req: Request) {
   try {

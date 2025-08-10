@@ -17,6 +17,9 @@ export const coursesApi = createApi({
     getCourses: builder.query<Course[], void>({
       query: () => "api/courses",
     }),
+    getCourse: builder.query<Course[], string>({
+      query: (email) => `api/booked-courses?email=${email}`
+    }),
     createCourses: builder.mutation<Course, Partial<Course>>({
       query: (newCourse) => ({
         url: "api/courses",
@@ -34,4 +37,4 @@ export const coursesApi = createApi({
   }),
 });
 
-export const { useGetCoursesQuery, useCreateCoursesMutation, useDeleteCourseMutation } = coursesApi;
+export const { useGetCoursesQuery, useGetCourseQuery, useCreateCoursesMutation, useDeleteCourseMutation } = coursesApi;
