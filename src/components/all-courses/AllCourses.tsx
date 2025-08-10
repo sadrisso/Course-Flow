@@ -1,41 +1,38 @@
 "use client";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useGetCoursesQuery } from "@/redux/services/coursesApi";
+import {
+  useDeleteCourseMutation,
+  useGetCoursesQuery,
+} from "@/redux/services/coursesApi";
 
 export default function AllCourses() {
-  const { data: courses, error, isLoading } = useGetCoursesQuery();
+  const {
+    data: courses,
+    error: coursesError,
+    isLoading: coursesIsLoading,
+    refetch,
+  } = useGetCoursesQuery();
+  const [deleteCourse] = useDeleteCourseMutation();
   const { data: session } = useSession();
-  const router = useRouter();
 
   const handleDelete = async (id: string) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this course?"
-    );
-    if (!confirmDelete) return;
+    if (!confirm("Are you sure you want to delete this course?")) return;
 
     try {
-      const res = await fetch(`/api/courses/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to delete course");
-      }
-
-      alert("Course deleted successfully");
-      // Refresh the page or update your UI state to remove the deleted course
-      router.refresh();
-    } catch (error) {
-      console.error("Delete error:", error);
-      alert("There was an error deleting the course");
+      await deleteCourse(id).unwrap(); // unwrap() returns the resolved response or throws error
+      alert("Course deleted successfully!");
+      refetch();
+      // optionally refetch courses or update cache here
+    } catch (err) {
+      console.error("Failed to delete:", err);
+      alert("Failed to delete course.");
     }
   };
 
-  if (isLoading) return <p className="text-black">Loading...</p>;
+  if (coursesIsLoading) return <p className="text-black">Loading...</p>;
 
-  if (error) return <p className="text-black">There is an error</p>;
+  if (coursesError) return <p className="text-black">There is an error</p>;
 
   return (
     <div className="bg-white">
@@ -70,9 +67,7 @@ export default function AllCourses() {
 
                   {session?.user?.role === "admin" && (
                     <>
-                      <button
-                        className="flex-1 bg-green-600 text-white text-sm py-1.5 px-3 rounded-md hover:bg-green-700 transition duration-200"
-                      >
+                      <button className="flex-1 bg-green-600 text-white text-sm py-1.5 px-3 rounded-md hover:bg-green-700 transition duration-200">
                         Edit
                       </button>
                       <button

@@ -11,11 +11,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Link from "next/link";
-import {
-  useGetCoursesQuery,
-  useGetUsersQuery,
-} from "@/redux/services/coursesApi";
+import { useGetCoursesQuery } from "@/redux/services/coursesApi";
 import { useSession } from "next-auth/react";
+import { useGetUsersQuery } from "@/redux/services/usersApi";
 
 const data = [
   { name: "Jan", users: 300 },

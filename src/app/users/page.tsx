@@ -1,5 +1,5 @@
 "use client"
-import { useGetUsersQuery } from "@/redux/services/coursesApi";
+import { useGetUsersQuery } from "@/redux/services/usersApi";
 import React from "react";
 
 function UserPage() {
