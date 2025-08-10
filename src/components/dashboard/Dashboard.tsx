@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { BarChart3, BookOpen, Users, Settings, Menu, X } from "lucide-react";
 import {
@@ -82,9 +82,7 @@ const Dashboard: React.FC = () => {
         {/* Topbar */}
         <div className="mb-6 flex flex-col sm:flex-row justify-between gap-4">
           <h2 className="text-xl font-semibold">Dashboard Overview</h2>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
-            Add Course
-          </button>
+          
         </div>
 
         {/* Stats */}

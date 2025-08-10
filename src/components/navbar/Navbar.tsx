@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import LoginButton from "../loginButton/LoginButton";
-
+import { useSession } from "next-auth/react";
+import LogoutButton from "../logoutButton/LogoutButton";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <p>Loading...</p>;
+
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
@@ -37,7 +41,21 @@ const Navbar: React.FC = () => {
               Courses
             </Link>
           </li>
-          <LoginButton />
+          {session?.user.role === "admin" && (
+            <li>
+              <Link href="/add-course" className="hover:text-blue-600">
+                Add Course
+              </Link>
+            </li>
+          )}
+          {session?.user.role === "admin" && (
+            <li>
+              <Link href="/dashboard" className="hover:text-blue-600">
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {session?.user ? <LogoutButton /> : <LoginButton />}
         </ul>
 
         {/* CTA Button */}
@@ -76,7 +94,21 @@ const Navbar: React.FC = () => {
               Courses
             </Link>
           </li>
-          <LoginButton />
+          {session?.user.role === "admin" && (
+            <li>
+              <Link href="/add-course" className="hover:text-blue-600">
+                Add Course
+              </Link>
+            </li>
+          )}
+          {session?.user.role === "admin" && (
+            <li>
+              <Link href="/dashboard" className="hover:text-blue-600">
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {session?.user ? <LogoutButton /> : <LoginButton />}
           <Link
             href="#start"
             className="inline-block w-full text-center mt-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
