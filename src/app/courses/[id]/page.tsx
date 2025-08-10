@@ -1,3 +1,6 @@
+import BookCourseButton from "@/components/book-course-button/BookCourseButton";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import React from "react";
 
 interface Course {
@@ -22,6 +25,8 @@ const getSingleCourseData = async (id: string): Promise<ApiResponse> => {
 
 const CoursesDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
+  const session = await getServerSession(authOptions);
+  console.log("User email:", session?.user?.email);
 
   const response = await getSingleCourseData(id);
   const singleCourseData = response.data;
@@ -79,9 +84,7 @@ const CoursesDetails = async ({ params }: { params: { id: string } }) => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition duration-300">
-              Book Course
-            </button>
+            <BookCourseButton courseId={singleCourseData?._id}/>
           </div>
         </div>
       </div>

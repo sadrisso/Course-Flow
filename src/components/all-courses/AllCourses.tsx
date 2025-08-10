@@ -5,6 +5,8 @@ import {
   useDeleteCourseMutation,
   useGetCoursesQuery,
 } from "@/redux/services/coursesApi";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function AllCourses() {
   const {
@@ -16,18 +18,35 @@ export default function AllCourses() {
   const [deleteCourse] = useDeleteCourseMutation();
   const { data: session } = useSession();
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this course?")) return;
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
-    try {
-      await deleteCourse(id).unwrap(); // unwrap() returns the resolved response or throws error
-      alert("Course deleted successfully!");
-      refetch();
-      // optionally refetch courses or update cache here
-    } catch (err) {
-      console.error("Failed to delete:", err);
-      alert("Failed to delete course.");
-    }
+  const handleDelete = async (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteCourse(id).unwrap(); // unwrap() returns the resolved response or throws error
+          refetch();
+          // optionally refetch courses or update cache here
+        } catch (err) {
+          console.error("Failed to delete:", err);
+        }
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   if (coursesIsLoading) return <p className="text-black">Loading...</p>;
