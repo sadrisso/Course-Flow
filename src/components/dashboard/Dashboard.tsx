@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { BarChart3, BookOpen, Users, Settings, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -11,29 +11,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Link from "next/link";
-
-const stats = [
-  {
-    title: "Total Courses",
-    value: 24,
-    icon: <BookOpen className="h-6 w-6 text-blue-500" />,
-  },
-  {
-    title: "Enrolled Students",
-    value: 842,
-    icon: <Users className="h-6 w-6 text-green-500" />,
-  },
-  {
-    title: "Active Instructors",
-    value: 12,
-    icon: <BarChart3 className="h-6 w-6 text-purple-500" />,
-  },
-  {
-    title: "Settings",
-    value: "Manage",
-    icon: <Settings className="h-6 w-6 text-yellow-500" />,
-  },
-];
+import {
+  useGetCoursesQuery,
+  useGetUsersQuery,
+} from "@/redux/services/coursesApi";
 
 const data = [
   { name: "Jan", users: 300 },
@@ -45,6 +26,8 @@ const data = [
 
 const Dashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data: users } = useGetUsersQuery();
+  const { data: courses } = useGetCoursesQuery();
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row text-gray-800">
@@ -66,12 +49,12 @@ const Dashboard: React.FC = () => {
         }`}
       >
         <nav className="flex flex-col gap-4">
-          <a href="#" className="text-blue-600 font-semibold">
+          <Link href="/dashboard" className="text-blue-600 font-semibold">
             Dashboard
-          </a>
+          </Link>
           <Link href="/">Home</Link>
-          <a href="#">Courses</a>
-          <a href="#">Students</a>
+          <Link href="/courses">Courses</Link>
+          <Link href="#">Users</Link>
           <a href="#">Instructors</a>
           <a href="#">Settings</a>
         </nav>
@@ -82,23 +65,26 @@ const Dashboard: React.FC = () => {
         {/* Topbar */}
         <div className="mb-6 flex flex-col sm:flex-row justify-between gap-4">
           <h2 className="text-xl font-semibold">Dashboard Overview</h2>
-          
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4"
-            >
-              <div className="bg-gray-100 p-3 rounded-full">{stat.icon}</div>
+          <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+            <div className="bg-gray-100 p-3 rounded-full"></div>
+            <div>
+              <p className="text-sm text-gray-500">Total Users</p>
+              <p className="text-xl font-bold">{users?.length}</p>
+            </div>
+          </div>
+          <Link href="/courses">
+            <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+              <div className="bg-gray-100 p-3 rounded-full"></div>
               <div>
-                <p className="text-sm text-gray-500">{stat.title}</p>
-                <p className="text-xl font-bold">{stat.value}</p>
+                <p className="text-sm text-gray-500">Total Courses</p>
+                <p className="text-xl font-bold">{courses?.length}</p>
               </div>
             </div>
-          ))}
+          </Link>
         </div>
 
         {/* Chart */}

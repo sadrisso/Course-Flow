@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, UserCircleIcon, X } from "lucide-react";
 import Link from "next/link";
 import LoginButton from "../loginButton/LoginButton";
 import { useSession } from "next-auth/react";
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
           )}
-          {session?.user.role === "admin" && (
+          {session?.user && (
             <li>
               <Link href="/dashboard" className="hover:text-blue-600">
                 Dashboard
@@ -59,14 +59,21 @@ const Navbar: React.FC = () => {
         </ul>
 
         {/* CTA Button */}
-        <div className="hidden md:block">
-          <Link
-            href="/register"
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
-          >
-            Register
-          </Link>
-        </div>
+        {session?.user ? (
+          <div className="flex items-center gap-2">
+            <UserCircleIcon className="h-6 w-6 text-gray-700" />
+            <p className="text-gray-800 font-medium">{session.user.name}</p>
+          </div>
+        ) : (
+          <div className="hidden md:block">
+            <Link
+              href="/register"
+              className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+            >
+              Register
+            </Link>
+          </div>
+        )}
 
         {/* Mobile Menu Icon */}
         <button
@@ -101,7 +108,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
           )}
-          {session?.user.role === "admin" && (
+          {session?.user && (
             <li>
               <Link href="/dashboard" className="hover:text-blue-600">
                 Dashboard

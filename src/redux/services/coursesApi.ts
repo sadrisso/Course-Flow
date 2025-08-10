@@ -10,6 +10,13 @@ interface Course {
   instructor: string;
 }
 
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 export const coursesApi = createApi({
   reducerPath: "courses",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
@@ -27,4 +34,15 @@ export const coursesApi = createApi({
   }),
 });
 
+export const usersApi = createApi({
+  reducerPath: "users",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  endpoints: (builder) => ({
+    getUsers: builder.query<User[], void>({
+      query: () => "api/users",
+    }),
+  }),
+});
+
 export const { useGetCoursesQuery, useCreateCoursesMutation } = coursesApi;
+export const {useGetUsersQuery} = usersApi;

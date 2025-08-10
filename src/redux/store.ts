@@ -1,13 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { coursesApi } from "./services/coursesApi";
+import { coursesApi, usersApi } from "./services/coursesApi";
 
 export const store = configureStore({
   reducer: {
     [coursesApi.reducerPath]: coursesApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(coursesApi.middleware),
+    getDefaultMiddleware()
+      .concat(coursesApi.middleware)
+      .concat(usersApi.middleware),
 });
 
 setupListeners(store.dispatch);
