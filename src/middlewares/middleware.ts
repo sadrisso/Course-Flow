@@ -6,7 +6,7 @@ export const middleware = async (req: NextRequest) => {
   const token = await getToken({ req });
   const isTokelOk = Boolean(token);
   const isUserAdmin = token?.role == "admin"
-  const isAdminSpecificRoute = req.nextUrl.pathname.startsWith("/dashboard");
+  const isAdminSpecificRoute = req.nextUrl.pathname.startsWith("/add-course");
 
   if (isAdminSpecificRoute && !isUserAdmin) {
     const callbackUrl = encodeURIComponent(req.nextUrl.pathname)

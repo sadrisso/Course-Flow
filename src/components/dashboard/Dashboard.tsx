@@ -15,6 +15,7 @@ import {
   useGetCoursesQuery,
   useGetUsersQuery,
 } from "@/redux/services/coursesApi";
+import { useSession } from "next-auth/react";
 
 const data = [
   { name: "Jan", users: 300 },
@@ -26,6 +27,7 @@ const data = [
 
 const Dashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data: session } = useSession();
   const { data: users } = useGetUsersQuery();
   const { data: courses } = useGetCoursesQuery();
 
@@ -63,19 +65,45 @@ const Dashboard: React.FC = () => {
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-6 mt-4 md:mt-0">
         {/* Topbar */}
-        <div className="mb-6 flex flex-col sm:flex-row justify-between gap-4">
-          <h2 className="text-xl font-semibold">Dashboard Overview</h2>
+        <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <h2 className="text-2xl font-bold text-gray-800">
+            Dashboard Overview
+          </h2>
+
+          {session?.user?.role === "admin" && (
+            <Link href="/add-course">
+              <button className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 hover:shadow-md transition-all duration-200 flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Add Course
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
-            <div className="bg-gray-100 p-3 rounded-full"></div>
-            <div>
-              <p className="text-sm text-gray-500">Total Users</p>
-              <p className="text-xl font-bold">{users?.length}</p>
+          <Link href="/users">
+            <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
+              <div className="bg-gray-100 p-3 rounded-full"></div>
+              <div>
+                <p className="text-sm text-gray-500">Total Users</p>
+                <p className="text-xl font-bold">{users?.length}</p>
+              </div>
             </div>
-          </div>
+          </Link>
           <Link href="/courses">
             <div className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4">
               <div className="bg-gray-100 p-3 rounded-full"></div>

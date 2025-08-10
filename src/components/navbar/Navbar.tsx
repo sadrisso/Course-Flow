@@ -55,15 +55,17 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
           )}
-          {session?.user ? <LogoutButton /> : <LoginButton />}
+          {!session?.user && <LoginButton />}
         </ul>
 
         {/* CTA Button */}
         {session?.user ? (
-          <div className="flex items-center gap-2">
-            <UserCircleIcon className="h-6 w-6 text-gray-700" />
-            <p className="text-gray-800 font-medium">{session.user.name}</p>
-          </div>
+          <Link href="/profile">
+            <div className="flex items-center gap-2">
+              <UserCircleIcon className="h-6 w-6 text-gray-700" />
+              <p className="text-gray-800 font-medium">{session.user.name}</p>
+            </div>
+          </Link>
         ) : (
           <div className="hidden md:block">
             <Link
@@ -93,7 +95,7 @@ const Navbar: React.FC = () => {
           <Link href="/about" className="block hover:text-blue-600">
             About
           </Link>
-          <Link href="#contact" className="block hover:text-blue-600">
+          <Link href="/blogs" className="block hover:text-blue-600">
             Blogs
           </Link>
           <li>
@@ -115,7 +117,7 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
           )}
-          {session?.user ? <LogoutButton /> : <LoginButton />}
+          {!session?.user && <LoginButton />}
           <Link
             href="#start"
             className="inline-block w-full text-center mt-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
