@@ -10,6 +10,12 @@ interface Course {
   instructor: string;
 }
 
+export interface BookedCourse {
+  _id: string;
+  courseId: string;
+  email: string;
+}
+
 export const coursesApi = createApi({
   reducerPath: "courses",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
@@ -18,7 +24,10 @@ export const coursesApi = createApi({
       query: () => "api/courses",
     }),
     getCourse: builder.query<Course[], string>({
-      query: (email) => `api/booked-courses?email=${email}`
+      query: (email) => `api/booked-courses?email=${email}`,
+    }),
+    getSingleCourse: builder.query<BookedCourse, string>({
+      query: (courseId) => `api/courses?courseId=${courseId}`,
     }),
     createCourses: builder.mutation<Course, Partial<Course>>({
       query: (newCourse) => ({
@@ -30,11 +39,17 @@ export const coursesApi = createApi({
     deleteCourse: builder.mutation<{ success: boolean; id: string }, string>({
       // The mutation receives the course id as string
       query: (id) => ({
-        url: `api/courses/${id}`, 
+        url: `api/courses/${id}`,
         method: "DELETE",
       }),
     }),
   }),
 });
 
-export const { useGetCoursesQuery, useGetCourseQuery, useCreateCoursesMutation, useDeleteCourseMutation } = coursesApi;
+export const {
+  useGetCoursesQuery,
+  useGetCourseQuery,
+  useGetSingleCourseQuery,
+  useCreateCoursesMutation,
+  useDeleteCourseMutation,
+} = coursesApi;

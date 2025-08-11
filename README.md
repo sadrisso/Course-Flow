@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Course Flow
 
-## Getting Started
+A modern web application built with **Next.js** (frontend + backend API routes), **TypeScript**, and **Redux Toolkit** for state management.  
+This project provides a structured way to manage courses, authenticate users, and display interactive data visualizations.
 
-First, run the development server:
+---
 
+## 🚀 Tech Stack
+
+**Frontend & Backend**
+- [Next.js 15](https://nextjs.org/) (with Turbopack for fast development)
+- [TypeScript](https://www.typescriptlang.org/) for type safety
+- [React 19](https://react.dev/) & [React DOM 19](https://react.dev/)
+- [Next Auth](https://next-auth.js.org/) for authentication
+- API routes with Next.js for backend functionality
+
+**State Management**
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Redux](https://react-redux.js.org/)
+
+**Database**
+- [MongoDB](https://www.mongodb.com/) (using the official Node.js driver)
+
+**UI & Styling**
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [Lucide React](https://lucide.dev/) for icons
+- [Recharts](https://recharts.org/) for charts & graphs
+- [SweetAlert2](https://sweetalert2.github.io/) for alerts & confirmations
+
+**Development Tools**
+- ESLint for linting
+- PostCSS with Tailwind
+
+---
+
+## ✨ Features
+
+- 🔐 **User Authentication** with NextAuth
+- 📊 **Interactive Dashboards** with Recharts
+- 📦 **State Management** via Redux Toolkit
+- 🌐 **API Routes** for server-side logic using Next.js
+- 🗄 **MongoDB Integration** for persistent data storage
+- 🛡 **Type Safety** with TypeScript
+- 🎨 **Modern UI** with Tailwind CSS and Lucide icons
+- ⚡ **Fast Development** using Turbopack
+
+---
+
+
+---
+
+## 🛠 Installation & Setup
+
+1. **Clone the repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[git clone https://github.com/sadrisso/course-flow.git](https://github.com/sadrisso/Course-Flow.git)
+cd Course-Flow
