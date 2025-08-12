@@ -2,10 +2,13 @@ import { dbConnect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, {params}: { params: { id: string } }) {
-  const { id } = params;
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context?.params;
 
-  console.log("id",id)
+  console.log("id", id);
 
   try {
     if (!ObjectId.isValid(id)) {
@@ -41,9 +44,9 @@ export async function GET(req: NextRequest, {params}: { params: { id: string } }
 
 export async function DELETE(
   req: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = context.params;
+  const { id } = await context.params;
 
   try {
     if (!ObjectId.isValid(id)) {
@@ -77,8 +80,8 @@ export async function DELETE(
   }
 }
 
-export async function PATCH(req: Request, context: { params: { id: string } }) {
-  const { id } = context.params;
+export async function PATCH(req: Request, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
 
   try {
     if (!ObjectId.isValid(id)) {
