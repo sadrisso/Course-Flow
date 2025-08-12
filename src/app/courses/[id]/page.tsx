@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import BookCourseButton from "@/components/book-course-button/BookCourseButton";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
@@ -13,17 +14,13 @@ interface Course {
   instructor: string;
 }
 
-interface ApiResponse {
-  data: Course;
-}
-
-const getSingleCourseData = async (id: string): Promise<ApiResponse> => {
+const getSingleCourseData = async (id: string) => {
   const res = await fetch(`http://localhost:3000/api/courses/${id}`);
   if (!res.ok) throw new Error("Failed to fetch single course data");
   return res.json();
 };
 
-const CoursesDetails = async ({ params }: { params: { id: string } }) => {
+const CoursesDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const session = await getServerSession(authOptions);
   console.log("User email:", session?.user?.email);
@@ -84,7 +81,7 @@ const CoursesDetails = async ({ params }: { params: { id: string } }) => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <BookCourseButton courseId={singleCourseData?._id}/>
+            <BookCourseButton courseId={singleCourseData?._id} />
           </div>
         </div>
       </div>

@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context?.params;
+  const { id } = await params;
 
   console.log("id", id);
 
@@ -44,9 +44,9 @@ export async function GET(
 
 export async function DELETE(
   req: Request,
-  context: { params: Promise<{ id: string }> }
+  {params}: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params;
+  const { id } = await params;
 
   try {
     if (!ObjectId.isValid(id)) {
@@ -80,8 +80,11 @@ export async function DELETE(
   }
 }
 
-export async function PATCH(req: Request, context: { params: Promise<{ id: string }> }) {
-  const { id } = await context.params;
+export async function PATCH(
+  req: Request,
+  {params}: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
 
   try {
     if (!ObjectId.isValid(id)) {
