@@ -49,7 +49,8 @@ export default function AllCourses() {
     });
   };
 
-  if (coursesIsLoading) return <p className="text-black bg-white min-h-screen">Loading...</p>;
+  if (coursesIsLoading)
+    return <p className="text-black bg-white min-h-screen">Loading...</p>;
 
   if (coursesError) return <p className="text-black">There is an error</p>;
 
@@ -86,9 +87,11 @@ export default function AllCourses() {
 
                   {session?.user?.role === "admin" && (
                     <>
-                      <button className="flex-1 bg-green-600 text-white text-sm py-1.5 px-3 rounded-md hover:bg-green-700 transition duration-200">
-                        Edit
-                      </button>
+                      <Link href={`edit/${course?._id}`}>
+                        <button className="flex-1 bg-green-600 text-white text-sm py-1.5 px-3 rounded-md hover:bg-green-700 transition duration-200">
+                          Edit
+                        </button>
+                      </Link>
                       <button
                         onClick={() => handleDelete(course?._id)}
                         className="flex-1 bg-red-600 text-white text-sm py-1.5 px-3 rounded-md hover:bg-red-700 transition duration-200"

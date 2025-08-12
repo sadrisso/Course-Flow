@@ -1,9 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function AddCourse() {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -30,8 +31,14 @@ export default function AddCourse() {
       });
 
       if (res.ok) {
-        alert("Course added successfully!");
-        router.push("/courses")
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/courses");
         setFormData({
           title: "",
           category: "",

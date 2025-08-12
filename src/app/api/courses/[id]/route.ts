@@ -1,9 +1,11 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: Request, context: { params: { id: string } }) {
-  const { id } = await context.params;
+export async function GET(req: NextRequest, {params}: { params: { id: string } }) {
+  const { id } = params;
+
+  console.log("id",id)
 
   try {
     if (!ObjectId.isValid(id)) {
