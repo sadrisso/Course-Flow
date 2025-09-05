@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 interface Testimonial {
   name: string;
@@ -32,23 +34,35 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+
 const TestimonialsSection: React.FC = () => {
   return (
     <section id="testimonials" className="bg-white py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto text-center mb-12">
+      <motion.div
+        className="max-w-7xl mx-auto text-center mb-12"
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
           What People Are Saying
         </h2>
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
           Trusted by instructors, students, and admins around the world.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {testimonials.map((testimonial, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition"
+            className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition"
+            initial="hidden"
+            whileInView="visible"
+            custom={index}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
           >
             <p className="text-gray-700 mb-4 text-sm italic">
               “{testimonial.message}”
@@ -70,7 +84,7 @@ const TestimonialsSection: React.FC = () => {
                 <p className="text-sm text-gray-500">{testimonial.role}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

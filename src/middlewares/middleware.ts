@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const middleware = async (req: NextRequest) => {
   const token = await getToken({ req });
-  const isTokelOk = Boolean(token);
+  const isTokenOk = Boolean(token);
   const isUserAdmin = token?.role == "admin"
   const isAdminSpecificRoute = req.nextUrl.pathname.startsWith("/add-course");
 

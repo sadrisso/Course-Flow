@@ -4,11 +4,52 @@ import { Menu, UserCircleIcon, X } from "lucide-react";
 import Link from "next/link";
 import LoginButton from "../loginButton/LoginButton";
 import { useSession } from "next-auth/react";
-import LogoutButton from "../logoutButton/LogoutButton";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+
+  const desktopLinks = () => {
+    return (
+      <ul className="hidden md:flex gap-8 font-medium text-gray-700">
+        <li>
+          <Link href="/" className="hover:text-blue-600">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about" className="hover:text-blue-600">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link href="/blogs" className="hover:text-blue-600">
+            Blogs
+          </Link>
+        </li>
+        <li>
+          <Link href="/courses" className="hover:text-blue-600">
+            Courses
+          </Link>
+        </li>
+        {session?.user.role === "admin" && (
+          <li>
+            <Link href="/add-course" className="hover:text-blue-600">
+              Add Course
+            </Link>
+          </li>
+        )}
+        {session?.user && (
+          <li>
+            <Link href="/dashboard" className="hover:text-blue-600">
+              Dashboard
+            </Link>
+          </li>
+        )}
+      </ul>
+    );
+  };
+  
 
   if (status === "loading") return <p>Loading...</p>;
 
@@ -20,43 +61,7 @@ const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 font-medium text-gray-700">
-          <li>
-            <Link href="/" className="hover:text-blue-600">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="hover:text-blue-600">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/blogs" className="hover:text-blue-600">
-              Blogs
-            </Link>
-          </li>
-          <li>
-            <Link href="/courses" className="hover:text-blue-600">
-              Courses
-            </Link>
-          </li>
-          {session?.user.role === "admin" && (
-            <li>
-              <Link href="/add-course" className="hover:text-blue-600">
-                Add Course
-              </Link>
-            </li>
-          )}
-          {session?.user && (
-            <li>
-              <Link href="/dashboard" className="hover:text-blue-600">
-                Dashboard
-              </Link>
-            </li>
-          )}
-          {!session?.user && <LoginButton />}
-        </ul>
+        {desktopLinks()}
 
         {/* CTA Button */}
         {session?.user ? (
@@ -70,10 +75,11 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <Link
               href="/register"
-              className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
+              className="mr-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
             >
               Register
             </Link>
+            <LoginButton />
           </div>
         )}
 
@@ -98,32 +104,27 @@ const Navbar: React.FC = () => {
           <Link href="/blogs" className="block hover:text-blue-600">
             Blogs
           </Link>
-          <li>
-            <Link href="/courses" className="hover:text-blue-600">
-              Courses
-            </Link>
-          </li>
+          <Link href="/courses" className="hover:text-blue-600">
+            Courses
+          </Link>
           {session?.user.role === "admin" && (
-            <li>
-              <Link href="/add-course" className="hover:text-blue-600">
-                Add Course
-              </Link>
-            </li>
+            <Link href="/add-course" className="hover:text-blue-600">
+              Add Course
+            </Link>
           )}
           {session?.user && (
-            <li>
-              <Link href="/dashboard" className="hover:text-blue-600">
-                Dashboard
-              </Link>
-            </li>
+            <Link href="/dashboard" className="hover:text-blue-600">
+              Dashboard
+            </Link>
           )}
-          {!session?.user && <LoginButton />}
+
           <Link
-            href="#start"
+            href="/register"
             className="inline-block w-full text-center mt-2 bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
           >
-            Get Started
+            Register
           </Link>
+          {!session?.user && <LoginButton />}
         </div>
       )}
     </nav>
