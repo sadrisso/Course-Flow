@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="container bg-white mx-auto px-4 py-16 flex flex-col-reverse md:flex-row items-center gap-10">
+    <section className="container bg-white mx-auto px-4 md:px-20 py-16 md:py-36 flex flex-col-reverse md:flex-row items-center gap-10">
       {/* Left content with animation */}
       <motion.div
         className="text-center md:text-left  md:pl-8"
@@ -22,13 +22,13 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           Manage Courses Effortlessly with{" "}
-          <Link href="/" className="text-blue-600">
+          <Link href="/" className="text-orange-600">
             CourseFlow
           </Link>
         </motion.h1>
 
         <motion.p
-          className="mt-4 text-gray-600 text-lg"
+          className="mt-4 text-gray-700 text-md"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
@@ -44,7 +44,7 @@ const HeroSection: React.FC = () => {
         >
           <Link
             href="/dashboard"
-            className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition"
+            className="mt-6 inline-block bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-700 transition"
           >
             Try it Free
           </Link>

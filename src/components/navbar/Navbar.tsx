@@ -54,9 +54,9 @@ const Navbar: React.FC = () => {
   if (status === "loading") return <p>Loading...</p>;
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 md:px-12 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-blue-600">
+    <nav className="bg-white md:sticky md:top-0 md:z-50">
+      <div className="container mx-auto px-4 md:px-24 py-4 md:py-6 shadow-md flex items-center justify-between">
+        <Link href="/" className="text-xl md:text-2xl font-bold text-orange-600">
           CourseFlow
         </Link>
 
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
           <Link href="/profile">
             <div className="flex items-center gap-2">
               <UserCircleIcon className="h-6 w-6 text-gray-700" />
-              <p className="text-gray-800 font-medium">{session.user.name}</p>
+              <p className="text-gray-800 text-xs md:text-lg md:font-medium">{session.user.name}</p>
             </div>
           </Link>
         ) : (

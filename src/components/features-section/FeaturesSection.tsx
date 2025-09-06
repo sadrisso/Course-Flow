@@ -34,10 +34,19 @@ const features: Feature[] = [
   },
 ];
 
-
 const FeaturesSection: React.FC = () => {
+  const colors = [
+    "bg-blue-100",
+    "bg-green-100",
+    "bg-yellow-100",
+    "bg-pink-100",
+  ];
+
   return (
-    <section id="features" className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+    <section
+      id="features"
+      className="bg-white py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+    >
       <motion.div
         className="max-w-7xl mx-auto text-center mb-12"
         initial={{ opacity: 0, y: -30 }}
@@ -57,7 +66,9 @@ const FeaturesSection: React.FC = () => {
         {features.map((feature, index) => (
           <motion.div
             key={index}
-            className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition"
+            className={`rounded-xl shadow-md p-6 text-center hover:shadow-lg transition ${
+              colors[index % colors.length]
+            }`}
             initial="hidden"
             whileInView="visible"
             custom={index}
